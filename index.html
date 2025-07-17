@@ -9,9 +9,15 @@
     body {
       background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
       margin: 0;
       padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
     }
 
     .background-layer {
@@ -26,33 +32,28 @@
     }
 
     .container {
-      position: relative;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 40px 20px 100px;
-      box-sizing: border-box;
-      text-align: center;
       z-index: 1;
+      max-width: 90%;
+      padding: 10px;
     }
 
     h1 {
-      font-weight: bold;
+      font-size: 1.5rem;
       color: #c0392b;
-      margin-bottom: 30px;
+      margin-bottom: 15px;
     }
 
     #typedText {
-      font-size: 1.5rem;
+      font-size: 1rem;
       color: #6d214f;
-      line-height: 1.6;
+      line-height: 1.4;
       white-space: pre-wrap;
     }
 
-    /* Floating Hearts */
     .heart {
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       background: red;
       transform: rotate(45deg);
       animation: floatUp 8s linear infinite;
@@ -63,19 +64,19 @@
     .heart::after {
       content: "";
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       background: red;
       border-radius: 50%;
     }
 
     .heart::before {
-      top: -10px;
+      top: -9px;
       left: 0;
     }
 
     .heart::after {
-      left: -10px;
+      left: -9px;
       top: 0;
     }
 
@@ -90,19 +91,20 @@
       }
     }
 
-    /* Mobile Enhancements */
     @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 1.3rem;
+      }
       #typedText {
-        font-size: 1.2rem;
+        font-size: 0.95rem;
+        line-height: 1.35;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Floating hearts layer -->
   <div class="background-layer" id="hearts-background"></div>
 
-  <!-- Main content -->
   <div class="container">
     <h1>My Love, My Light 💖</h1>
     <p id="typedText" class="lead mt-4"></p>
@@ -131,12 +133,12 @@
         if (charIndex < message[index].length) {
           textEl.innerHTML += message[index].charAt(charIndex);
           charIndex++;
-          setTimeout(typeText, 50);
+          setTimeout(typeText, 40);
         } else {
           charIndex = 0;
           index++;
           textEl.innerHTML += "\n\n";
-          setTimeout(typeText, 1000);
+          setTimeout(typeText, 800);
         }
       }
     }
@@ -153,7 +155,7 @@
       setTimeout(() => heart.remove(), 10000);
     }
 
-    setInterval(createHeart, 500);
+    setInterval(createHeart, 600);
   </script>
 </body>
 </html>

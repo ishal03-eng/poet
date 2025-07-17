@@ -10,42 +10,45 @@
       background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #333;
-      overflow: hidden;
-      min-height: 100vh;
       margin: 0;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
+      padding: 0;
+    }
+
+    .background-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .container {
+      position: relative;
       max-width: 600px;
-      z-index: 10;
+      margin: 0 auto;
+      padding: 40px 20px 100px;
+      box-sizing: border-box;
+      text-align: center;
+      z-index: 1;
     }
 
     h1 {
       font-weight: bold;
       color: #c0392b;
+      margin-bottom: 30px;
     }
 
     #typedText {
       font-size: 1.5rem;
       color: #6d214f;
-      min-height: 150px;
       line-height: 1.6;
+      white-space: pre-wrap;
     }
 
-    #countdown {
-      font-size: 1.25rem;
-      color: #b33771;
-      margin-top: 20px;
-      font-style: italic;
-    }
-
-    /* Floating Hearts Animation */
+    /* Floating Hearts */
     .heart {
       position: absolute;
       width: 20px;
@@ -86,29 +89,38 @@
         opacity: 0;
       }
     }
+
+    /* Mobile Enhancements */
+    @media screen and (max-width: 600px) {
+      #typedText {
+        font-size: 1.2rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container mt-5">
+  <!-- Floating hearts layer -->
+  <div class="background-layer" id="hearts-background"></div>
+
+  <!-- Main content -->
+  <div class="container">
     <h1>My Love, My Light 💖</h1>
     <p id="typedText" class="lead mt-4"></p>
   </div>
 
-  <!-- JavaScript -->
   <script>
     const message = [
-  "Even though we're miles apart...",
-  "You're with me in every heartbeat 💓",
-  "I miss your voice, your smile, your warmth...",
-  "But I hold onto the love that connects us ❤️",
-  "Every night, I look at your photos and think of you...",
-  "And the moon lamp you gave me...",
-  "It glows softly beside me, just like your presence in my life.",
-  "Some nights, I even whisper to it... like I'm whispering to you.",
-  "Until we speak again...",
-  "Just know — you're my forever and always 💕"
-];
-
+      "Even though we're miles apart...",
+      "You're with me in every heartbeat 💓",
+      "I miss your voice, your smile, your warmth...",
+      "But I hold onto the love that connects us ❤️",
+      "Every night, I look at your photos and think of you...",
+      "And the moon lamp you gave me...",
+      "It glows softly beside me, just like your presence in my life.",
+      "Some nights, I even whisper to it... like I'm whispering to you.",
+      "Until we speak again...",
+      "Just know — you're my forever and always 💕"
+    ];
 
     let index = 0;
     let charIndex = 0;
@@ -123,29 +135,25 @@
         } else {
           charIndex = 0;
           index++;
-          textEl.innerHTML += "<br/><br/>";
-          setTimeout(typeText, 1200);
+          textEl.innerHTML += "\n\n";
+          setTimeout(typeText, 1000);
         }
       }
     }
-    typeText();
 
-  
+    typeText();
 
     // Floating Hearts
     function createHeart() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (6 + Math.random() * 4) + "s"; // random duration between 6-10s
-      document.body.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 10000); // remove after animation
+      heart.style.animationDuration = (6 + Math.random() * 4) + "s";
+      document.getElementById('hearts-background').appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
     }
 
-    setInterval(createHeart, 500); // Create a heart every half second
+    setInterval(createHeart, 500);
   </script>
 </body>
 </html>
